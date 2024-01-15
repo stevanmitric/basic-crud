@@ -1,13 +1,13 @@
 import {
   getAll,
-  register,
+  create,
   getById,
   update,
   removeProduct
 } from "./product.controller.mjs";
 
 export default (app) => {
-  app.route("/users").get(getAll).post(register);
+  app.route("/products").get(getAll).post(create);
 
-  app.route("/user/:id").get(getById).put(update).delete(removeProduct);
+  app.route("/product/:id").get(getById).put(update).delete(removeProduct);
 };

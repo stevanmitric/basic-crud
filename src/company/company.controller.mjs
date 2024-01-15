@@ -1,6 +1,4 @@
-import Product from "./models/product.model.mjs";
-
-import Products from "./product.class.mjs";
+import Company from "./company.class.mjs";
 
 export async function getAll(req, res) {
   try {
@@ -14,9 +12,9 @@ export async function getAll(req, res) {
     const select =
       req.query && req.query.select ? JSON.parse(req.query.select) : {};
 
-    const products = await Products.getAll(filters, sorter, skip, select);
+    const companies = await Company.getAll(filters, sorter, skip, select);
 
-    return res.status(200).json(products);
+    return res.status(200).json(companies);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -24,25 +22,13 @@ export async function getAll(req, res) {
 
 export async function create(req, res) {
   try {
-    const { data } = req.body;
+    const data = req.body;
 
-    const product = await Products.create(data);
+    const company = await Company.create(data);
 
     return res
       .status(201)
-      .json({ message: "New product created!", created: product });
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-}
-
-export async function getById(req, res) {
-  try {
-    const { id } = req.params;
-
-    const product = await Products.getById(id);
-
-    return res.status(200).json({ product: product });
+      .json({ message: "Company created!", company: company });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -50,29 +36,40 @@ export async function getById(req, res) {
 
 export async function update(req, res) {
   try {
-    const { id } = req.params;
+    const data = req.body;
+    const id = req.params.id;
 
-    const { data } = req.body;
-
-    const product = await Products.update(id, data);
+    const company = await Company.update(id, data);
 
     return res
       .status(201)
-      .json({ message: "Product updated successfully!", updated: product });
+      .json({ message: "Company updated!", company: company });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 }
 
-export async function removeProduct(req, res) {
+export async function getById(req, res) {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
 
-    const product = await Products.remove(id);
+    const company = await Company.getById(id);
+
+    return res.status(200).json(company);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export async function remove(req, res) {
+  try {
+    const id = req.params.id;
+
+    const company = await Company.remove(id);
 
     return res
       .status(200)
-      .json({ message: "Product deleted successfully!", removed: product });
+      .json({ message: "Company removed!", company: company });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

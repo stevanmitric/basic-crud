@@ -3,7 +3,8 @@ import Users from "./user.class.mjs";
 
 export async function getAll(req, res) {
   try {
-    const users = await User.find().lean();
+    const query = req.query;
+    const users = await Users.getAll(query);
 
     return res.status(200).json(users);
   } catch (error) {
@@ -14,6 +15,8 @@ export async function getAll(req, res) {
 export async function register(req, res) {
   try {
     const newUser = await Users.registerNewUser(req.body);
+
+    console.log("req body data", req.body);
 
     return res
       .status(201)
@@ -27,7 +30,7 @@ export async function getById(req, res) {
   try {
     const { id } = req.params;
 
-    const user = await User.findOne({ _id: id });
+    const user = await Users.getById(id);
 
     return res.status(201).json({ user: user });
   } catch (error) {

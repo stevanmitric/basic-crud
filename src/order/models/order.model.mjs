@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema(
   {
-    orderId: {
+    orderNumber: {
       type: String,
       required: true
     },

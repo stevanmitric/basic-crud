@@ -1,15 +1,15 @@
-import Product from "./models/product.model.mjs";
+import Company from "./models/company.model.mjs";
 
-class Products {
+class CompanyClass {
   static async getAll(filters, sorter, skip, select) {
     try {
-      const products = await Product.find(filters)
+      const companies = await Company.find(filters)
         .sort(sorter)
         .skip(skip)
         .select(select)
         .lean();
 
-      return products;
+      return companies;
     } catch (error) {
       return error.message;
     }
@@ -17,9 +17,9 @@ class Products {
 
   static async create(data) {
     try {
-      const product = new Product({ ...data }).save();
+      const company = new Company({ ...data }).save();
 
-      return product;
+      return company;
     } catch (error) {
       return error.message;
     }
@@ -27,7 +27,7 @@ class Products {
 
   static async update(id, data) {
     try {
-      await Product.updateOne({ _id: id }, { ...data });
+      await Company.updateOne({ _id: id }, { ...data });
 
       return true;
     } catch (error) {
@@ -37,9 +37,9 @@ class Products {
 
   static async getById(id) {
     try {
-      const product = await Product.findOne({ _id: id });
+      const company = await Company.findOne({ _id: id });
 
-      return product;
+      return company;
     } catch (error) {
       return error.message;
     }
@@ -47,13 +47,13 @@ class Products {
 
   static async remove(id) {
     try {
-      await Product.deleteOne({ _id: id });
+      await Company.deleteOne({ _id: id });
 
       return true;
     } catch (error) {
-      return error;
+      error.message;
     }
   }
 }
 
-export default Products;
+export default CompanyClass;

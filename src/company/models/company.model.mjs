@@ -2,45 +2,44 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const productSchema = new Schema(
+const companySchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true
     },
-    description: {
+    pib: {
       type: String,
       required: true
     },
-    price: {
+    companyNumber: {
       type: String,
       required: true
     },
-    discount: {
+    city: {
       type: Boolean,
       default: false
     },
-    discountPrice: {
+    zip: {
       type: String,
       required: true
     },
+    address: {
+      type: String
+    },
     status: {
       type: String,
-      enum: ["ACTIVE", "SUSPENDED", "DELETED"],
+      enum: ["ACTIVE", "INACTIVE", "DELETED"],
       default: "ACTIVE"
     },
-    gallery: [
+    mainAccount: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Image"
+        ref: "User"
       }
-    ],
-    featureImage: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Image"
-    }
+    ]
   },
   { timestamps: true }
 );
 
-export default mongoose.model("Product", productSchema);
+export default mongoose.model("Company", companySchema);
