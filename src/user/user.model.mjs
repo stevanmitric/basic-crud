@@ -24,6 +24,9 @@ const userSchema = new Schema(
       type: String,
       enum: ["ACTIVE", "SUSPENDED", "DELETED", "WAITING FOR ACTIVATION"],
       default: "WAITING FOR ACTIVATION"
+    },
+    country: {
+      type: String
     }
   },
   {

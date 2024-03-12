@@ -1,5 +1,3 @@
-import Product from "./models/product.model.mjs";
-
 import Products from "./product.class.mjs";
 
 export async function getAll(req, res) {

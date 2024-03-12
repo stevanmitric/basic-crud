@@ -12,20 +12,6 @@ export async function getAll(req, res) {
   }
 }
 
-export async function register(req, res) {
-  try {
-    const newUser = await Users.registerNewUser(req.body);
-
-    console.log("req body data", req.body);
-
-    return res
-      .status(201)
-      .json({ message: "New user created!", user: newUser });
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-}
-
 export async function getById(req, res) {
   try {
     const { id } = req.params;
